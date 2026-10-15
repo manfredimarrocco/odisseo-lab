@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+const root=path.resolve(import.meta.dirname,'..');
+const app=path.join(root,'wordpress/odisseo-lab-integration/app');
+const core=fs.readFileSync(path.join(app,'core.js'),'utf8'), ui=fs.readFileSync(path.join(app,'app.js'),'utf8'), css=fs.readFileSync(path.join(app,'styles.css'),'utf8');
+const hash=s=>"'sha256-"+createHash('sha256').update(s).digest('base64')+"'";
+let html=fs.readFileSync(path.join(app,'index.html'),'utf8');
+html=html.replace("script-src 'self'; style-src 'self'","script-src "+hash(core)+" "+hash(ui)+"; style-src "+hash(css)).replace("img-src 'self' data:","img-src data:");
+html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>').replace('<script defer src="core.js"></script>','<script>'+core+'</script>').replace('<script defer src="app.js"></script>','');
+html=html.replace('</body>','<script>'+ui+'</script></body>');
+const dest=path.join(root,'dist/standalone/ODISSEO');fs.mkdirSync(dest,{recursive:true});
+fs.writeFileSync(path.join(dest,'index.html'),html);
+for(const name of ['LICENSE','THIRD-PARTY-NOTICES.md','README.md'])fs.copyFileSync(path.join(root,name),path.join(dest,name));
+console.log('Standalone generated from WordPress app; offline browser verification remains required.');
