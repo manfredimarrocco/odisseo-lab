@@ -7,7 +7,7 @@ const core=fs.readFileSync(path.join(app,'core.js'),'utf8'), ui=fs.readFileSync(
 const hash=s=>"'sha256-"+createHash('sha256').update(s).digest('base64')+"'";
 let html=fs.readFileSync(path.join(app,'index.html'),'utf8');
 html=html.replace("script-src 'self'; style-src 'self'","script-src "+hash(core)+" "+hash(ui)+"; style-src "+hash(css)).replace("img-src 'self' data:","img-src data:");
-html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>').replace('<script defer src="core.js"></script>','<script>'+core+'</script>').replace('<script defer src="app.js"></script>','');
+html=html.replace(/<link rel="stylesheet" href="styles\.css(?:\?[^"]*)?">/,'<style>'+css+'</style>').replace(/<script defer src="core\.js(?:\?[^"]*)?"><\/script>/,'<script>'+core+'</script>').replace(/<script defer src="app\.js(?:\?[^"]*)?"><\/script>/,'');
 html=html.replace('</body>','<script>'+ui+'</script></body>');
 const dest=path.join(root,'dist/standalone/ODISSEO');fs.mkdirSync(dest,{recursive:true});
 fs.writeFileSync(path.join(dest,'index.html'),html);

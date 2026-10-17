@@ -14,3 +14,8 @@
 - Dedicated status/error announcements replace the live region on the entire main area.
 - Invalid wizard fields receive focus and an accessible invalid state.
 - Preserved the 121-control catalog, NC identifiers, state rules and existing reduced-motion support.
+
+## 0.1.5-preview — 2026-10-17
+
+- Versioned application asset URLs prevent browsers from reusing pre-update JavaScript and CSS.
+- Standalone packaging accepts versioned asset references; application engine remains unchanged.
