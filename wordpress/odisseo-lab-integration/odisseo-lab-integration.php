@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ODISSEO — Integrazione GRC Lab
  * Description: Aggiunge una sezione dimostrativa ODISSEO sotto TITANIUM nel Lab, senza modificare il plugin TITANIUM né la pagina WordPress.
- * Version: 0.1.3-preview
+ * Version: 0.1.4-preview
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * License: MIT
@@ -15,8 +15,8 @@ function mm_od_lab_enqueue_assets() {
     if (!is_page('lab')) { return; }
     $post = get_queried_object();
     if (!$post instanceof WP_Post || !has_shortcode($post->post_content, 'mm_grc_lab')) { return; }
-    wp_enqueue_style('mm-odisseo-lab-integrated', plugins_url('assets/integration.css', __FILE__), array(), '0.1.3-preview');
-    wp_enqueue_script('mm-odisseo-lab-integrated', plugins_url('assets/launcher.js', __FILE__), array(), '0.1.3-preview', true);
+    wp_enqueue_style('mm-odisseo-lab-integrated', plugins_url('assets/integration.css', __FILE__), array(), '0.1.4-preview');
+    wp_enqueue_script('mm-odisseo-lab-integrated', plugins_url('assets/launcher.js', __FILE__), array(), '0.1.4-preview', true);
 }
 add_action('wp_enqueue_scripts', 'mm_od_lab_enqueue_assets', 120);
 
@@ -29,7 +29,7 @@ function mm_od_lab_append_after_titanium($output, $tag, $attr, $m) {
     static $already_added = false;
     if ($already_added) { return $output; }
     $already_added = true;
-    $app_url = add_query_arg('ver', '0.1.3-preview', plugins_url('app/index.html', __FILE__));
+    $app_url = add_query_arg('ver', '0.1.4-preview', plugins_url('app/index.html', __FILE__));
     ob_start(); ?>
     <nav class="mm-od-selector" aria-label="Scegli il laboratorio dimostrativo">
       <span class="mm-od-selector-label">Esplora gli applicativi</span>

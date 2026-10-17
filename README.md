@@ -2,7 +2,7 @@
 
 Demo indipendente per pianificare sopralluoghi, compilare checklist e gestire non conformità. Interfaccia italiana, dati sintetici, nessun account o backend.
 
-**[Prova nel Lab WordPress](https://manfredimarrocco.blog/lab/#odisseo)** · **[Download v0.1.3-preview](https://github.com/manfredimarrocco/odisseo-lab/releases/tag/v0.1.3-preview)** · **[Guida tecnica](docs/TECHNICAL.md)**
+**[Prova nel Lab WordPress](https://manfredimarrocco.blog/lab/#odisseo)** · **[Download v0.1.4-preview](https://github.com/manfredimarrocco/odisseo-lab/releases/tag/v0.1.4-preview)** · **[Guida tecnica](docs/TECHNICAL.md)**
 
 ## Funzioni
 - Quattro checklist originali e generiche: Tronchini 29, Siti 34, Parcheggi 30, Stazioni 28: 121 controlli.
@@ -13,7 +13,7 @@ Demo indipendente per pianificare sopralluoghi, compilare checklist e gestire no
 - Export CSV e XLSX tabellari, JSON completo per riprendere il lavoro. Il formato Excel è un export, non un template di importazione: l’importazione disponibile è JSON.
 
 ## Avvio
-Scarica `ODISSEO-0.1.3-preview-standalone.zip`, estrailo e apri `ODISSEO/index.html` in un browser aggiornato. Avvia la demo oppure una sessione vuota. Prima di chiudere, usa **Salva sessione**: non c’è salvataggio automatico.
+Scarica `ODISSEO-0.1.4-preview-standalone.zip`, estrailo e apri `ODISSEO/index.html` in un browser aggiornato. Avvia la demo oppure una sessione vuota. Prima di chiudere, usa **Salva sessione**: non c’è salvataggio automatico.
 
 WordPress ospita il Lab; GitHub ospita sorgenti, cronologia e pacchetti. Non è necessario GitHub Pages né un servizio a pagamento.
 

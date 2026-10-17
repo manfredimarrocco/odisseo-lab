@@ -35,3 +35,14 @@
 @media(max-width:680px){.mm-od-header{grid-template-columns:1fr;padding:26px 21px}.mm-od-symbol{display:none}.mm-od-workspace{margin:0 12px 14px}.mm-odisseo-lab iframe{height:820px}.mm-od-selector{justify-content:flex-start}.mm-od-selector-label{flex-basis:100%}}
 @media(max-width:420px){.mm-odisseo-lab iframe{height:760px}.mm-od-chips span{font-size:10px}.mm-odisseo-lab h2{font-size:29px!important}}
 @media(prefers-reduced-motion:reduce){.mm-od-selector-link,.mm-odisseo-lab *{transition:none!important;animation:none!important}}
+
+/* Repository/download card: independent from the application header grid. */
+.mm-lab-downloads{box-sizing:border-box;margin:34px 0 48px;padding:clamp(22px,4vw,44px);border:1px solid #61434e;border-radius:17px;background:#1c232d;color:#f6f3ed;overflow-wrap:anywhere;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.mm-lab-downloads .mm-lab-downloads-body{display:block;min-width:0;width:100%}
+.mm-lab-downloads h2{margin:0 0 16px;color:#f6f3ed!important;font-size:clamp(22px,3vw,30px);line-height:1.25}
+.mm-lab-downloads .mm-lab-downloads-intro{max-width:75ch;margin:0 0 20px;color:#e0e1e3!important;line-height:1.75}
+.mm-lab-downloads .mm-lab-downloads-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:0 0 18px}
+.mm-lab-downloads a{color:#ebd0b7!important;text-underline-offset:3px}
+.mm-lab-downloads .mm-lab-downloads-button{display:inline-flex;align-items:center;justify-content:center;padding:13px 22px;border:1px solid #a74f5e;border-radius:10px;background:#8e2334;color:#fff8f5!important;font-weight:750;text-decoration:none}
+.mm-lab-downloads a:focus-visible{outline:3px solid #dcc4a0;outline-offset:4px}
+@media(max-width:680px){.mm-lab-downloads{padding:26px 21px}.mm-lab-downloads .mm-lab-downloads-button{max-width:100%;box-sizing:border-box}}
