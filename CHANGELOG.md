@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0 — 2026-10-20 · stable demonstration
+
+- Validate full imported session shape, NC relationships, dates, times, history and resource limits.
+- Generate unique notification IDs for repeated planning previews.
+- Reject changes exceeding the 5 MB session limit without modifying existing work.
+- Keep report tables within narrow screens.
+- Add 18 regression checks and a standalone CSP packaging check; preserve all 24 existing checks.
+- Official demonstration distribution; added disclaimer, privacy-clean packaging and declared compatibility. Original code remains MIT licensed.
+
+
 ## 0.1.3-preview — 15 ottobre 2026
 - Prima distribuzione pubblica GitHub della demo già integrata nel Lab WordPress.
 - Integrazione aggiuntiva con TITANIUM, senza sostituirne shortcode o HTML.

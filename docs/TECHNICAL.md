@@ -1,5 +1,6 @@
 # Guida tecnica
 
+
 ## Architettura
 HTML/CSS/JavaScript nativi, nessuna dipendenza runtime esterna. Stato in memoria: pianificazioni, sopralluoghi, risposte, NC, notifiche simulate, fotografie dimostrative e contatore progressivo. `core.js` implementa il motore; `app.js` gestisce il DOM.
 

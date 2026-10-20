@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict');
+const C=require('../wordpress/odisseo-lab-integration/app/core.js');
+let passed=0,failed=0;
+function test(name,fn){try{fn();passed++;console.log('PASS '+name);}catch(e){failed++;console.log('FAIL '+name+': '+e.message);}}
+const bad=(name,mutate)=>test(name,()=>{const s=C.demo();mutate(s);assert.throws(()=>C.validateImport(s));});
+bad('reject impossible date',s=>s.inspections[0].date='2026-02-31');
+bad('reject invalid inspection time',s=>s.inspections[0].start='99:99');
+bad('reject unknown NC category',s=>s.ncs[0].category='unknown');
+bad('reject non-string structure',s=>s.inspections[0].structure={bad:1});
+bad('reject malformed history',s=>s.ncs[0].history=[null]);
+bad('reject unknown control',s=>s.ncs[0].controlId='FAKE-1');
+bad('reject inconsistent NC key',s=>s.ncs[0].key='wrong');
+bad('reject missing required NC',s=>s.ncs.pop());
+bad('reject archived open NC',s=>{s.ncs[0].archived=true;s.ncs[0].closed='';});
+bad('reject malformed notification',s=>s.notifications[0].body={bad:1});
+bad('reject unsupported planning state',s=>s.plans[0].state='broken');
+bad('reject invalid photos container',s=>s.inspections[0].photos={});
+bad('reject excessive photo count',s=>s.inspections[0].photos=Array(4).fill({name:'demo',data:'data:image/png;base64,AAAA'}));
+bad('reject unsafe sequence upper bound',s=>s.seq=Number.MAX_SAFE_INTEGER);
+test('repeated previews survive JSON roundtrip',()=>{const s=C.demo(),id=s.plans[0].id;C.previewPlan(s,id);C.previewPlan(s,id);assert.ok(C.validateImport(JSON.parse(JSON.stringify(s))));assert.equal(new Set(s.notifications.map(x=>x.id)).size,s.notifications.length);});
+test('over-limit changes leave session intact',()=>{const s=C.demo();s.inspections[0].conclusion='x'.repeat(5*1024*1024);const before=JSON.stringify(s);assert.throws(()=>C.previewPlan(s,s.plans[0].id));assert.equal(JSON.stringify(s),before);});
+test('all categories and NC lifecycle roundtrip',()=>{const s=C.demo();for(const n of [...s.ncs])if(!n.archived){C.setStatus(s,n.id,'Risolta','Demo','Risoluzione dimostrativa');C.archive(s,n.id);}assert.ok(C.validateImport(JSON.parse(JSON.stringify(s))));});
+test('reserved property names remain valid structure labels',()=>{const s=C.demo();s.inspections[0].structure='__proto__';for(const n of s.ncs)if(n.inspectionId===s.inspections[0].id)n.structure='__proto__';C.validateImport(s);assert.equal(C.analytics(s).structures.find(([name])=>name==='__proto__')?.[1],2);});
+console.log(JSON.stringify({passed,failed}));if(failed)process.exitCode=1;
